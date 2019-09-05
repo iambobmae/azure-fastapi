@@ -2,10 +2,12 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from models.item import Item, ItemCreate, ItemUpdate
+
 router = APIRouter()
 
 
-@router.get("")
+@router.get("", response_model=List[Item])
 def read_items():
     """
     Retrieve items.
@@ -13,23 +15,27 @@ def read_items():
     pass
 
 
-@router.post("")
-def create_item():
+@router.post("", response_model=Item)
+def create_item(*,
+    item_in: ItemCreate,
+):
     """
     Create new item.
     """
     pass
 
 
-@router.put("/{id}")
-def update_item():
+@router.put("/{id}",response_model=Item)
+def update_item(*,
+    item_in: ItemUpdate,
+):
     """
     Update an item.
     """
     pass
 
 
-@router.get("/{id}")
+@router.get("/{id}", response_model=Item)
 def read_user_me():
     """
     Get item by ID.
@@ -37,7 +43,7 @@ def read_user_me():
     pass
 
 
-@router.delete("/{id}")
+@router.delete("/{id}", response_model=Item)
 def delete_item():
     """
     Delete an item.
