@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 import uvicorn
 
+from api.api_v1.api import api_router
+
 app = FastAPI()
 
 
@@ -8,6 +10,7 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
+app.include_router(api_router)
 
 if __name__ == "__main__":
     uvicorn.run(
